@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import {init} from '@emailjs/browser';
-init(process.env.ID);
 
-const ContactForm = () => {
+const FormTemplate = () => {
     // Le hook useRef() permet de récupérer un objet DOM (ici le formulaire) et de le stocker dans une variable (ici form). On a ainsi accès aux valeurs des champs du formulaire.
   const form = useRef();
-      
+  
+    
   const sendEmail = (e) => {
     e.preventDefault();
     const formMes = document.querySelector('.form-message');
@@ -38,19 +37,18 @@ const ContactForm = () => {
 
   return (
     <div className="form-container">
-      <h2>contactez-nous</h2>
-        <form ref={form} onSubmit={sendEmail} className='form-content'>
+        <form ref={form} onSubmit={sendEmail}>
             <label>Nom</label>
-            <input type="text" name="name" required autoComplete='off' id="name" />
+            <input type="text" name="name" required autoComplete='off' />
             <label>Email</label>
-            <input type="email" name="email" required autoComplete='off' id="email" />
+            <input type="email" name="email" required autoComplete='off' />
             <label>Message</label>
-            <textarea name="message" required id="mess"/>
-            <input type="submit" value="Envoyer" className='hover button' />
+            <textarea name="message" required />
+            <input type="submit" value="Envoyer" />
         </form>
         <div className="form-message"></div>
     </div>
   );
 };
 
-export default ContactForm;
+export default FormTemplate;

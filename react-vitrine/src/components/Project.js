@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { projectsData } from "../data/projectsData";
+import { motion } from "framer-motion";
 
 const Project = ({ projectNumber }) => {
   const [currentProject] = useState(projectsData[projectNumber]);
@@ -13,7 +14,7 @@ const Project = ({ projectNumber }) => {
   }, []);
   console.log(currentProject);
   return (
-    <div className="project-main">
+    <motion.div className="project-main">
       <div className="project-content">
         <h1>{currentProject.title}</h1>
         <p>{currentProject.date}</p>
@@ -57,7 +58,7 @@ const Project = ({ projectNumber }) => {
         className="random-circle"
         style={{ left, top, transform: size }}
       ></span>
-    </div>
+    </motion.div>
   );
 };
 

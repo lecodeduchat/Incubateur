@@ -114,7 +114,7 @@
       border: none;
     }
   }
-  .formMessage {
+  .form-message {
     p {
       border-radius: 20px;
       text-align: center;
@@ -183,7 +183,7 @@
   .email,
   .phone {
     @media screen and (max-height: 640px) {
-      display: none;
+      // display: none;
     }
   }
   .email .content p,
