@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --primary-color: #286359;
+}
+h1,h2,h3,h4,h5,h6{
+    text-align: center;
+    margin: 20px 0;
+    color:var(--primary-color);
+}
+/* TODO télécharger Montserrat */
+@font-face {
+    font-family: 'Montserrat';
+    src: url(/src/assets/fonts/Montserrat/static/Montserrat-Regular.ttf);
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+}

@@ -1,0 +1,24 @@
+.banner{
+    height: 100px;
+    background: var(--primary-color);
+    color:#fff;
+    height:100px;
+}
+.banner ul{
+    height:100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    list-style: none;
+}
+.banner ul li{
+    margin: 0 10px;
+    width:50%;
+    text-align: center;
+    padding:0 20px;
+}
+.banner ul li:nth-of-type(2){
+    border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
+}
