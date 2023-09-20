@@ -17,6 +17,7 @@ use ApiPlatform\Metadata\Delete;
     normalizationContext: ['groups' => ['read:collection']],
     denormalizationContext: ['groups' => ['write:Post']],
     operations:[
+        new Post(),
         new Patch(),
         new Delete(),
         new Get(

@@ -5,7 +5,7 @@ const Logo = () => {
         <div>
             <div className="logo">
             {/* Les images importées depuis la balise img sont accessibles dans public */}
-            <img src="./img/logo.webp" alt="logo la boutique de Margaux" />
+            <img src="/img/logo.webp" alt="logo la boutique de Margaux" />
             
         </div>
         </div>

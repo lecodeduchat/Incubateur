@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Slider from '../components/Slider';
 import Banner from '../components/Banner';
-import Card from '../components/Card';
+import Favoris from '../components/Favoris';
 
 
 const Home = () => {
@@ -20,12 +20,7 @@ const Home = () => {
             <Header />
             <Slider />
             <Banner banner={banner1} />
-            <div className="favoris">
-                <h2>NOS FAVORIS</h2>
-                <div className="cards">
-                <Card />
-                </div>
-            </div>
+            <Favoris />
             <Banner banner={banner2} />
         </div>
     );
