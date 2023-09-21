@@ -1,0 +1,25 @@
+.table-basket {
+  width: 1200px;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+.table-basket th {
+  text-align: left;
+  padding: 10px 0px;
+  border-bottom: 1px solid #ddd;
+}
+.table-basket td {
+  padding: 10px 0px;
+  border-bottom: 1px solid #ddd;
+}
+.table-basket td .img-small {
+  width: 100px;
+}
+.table-basket tfoot td:nth-of-type(1) {
+  text-align: right;
+  padding-right: 50px;
+}
+.btn-clear-basket:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+}

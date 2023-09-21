@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\ArticlesRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
-use App\Controller\GetArticlesBySlugAction;
+use App\Controller\GetArticleBySlugController;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
@@ -16,25 +16,27 @@ use ApiPlatform\Metadata\Link;
 
 #[ORM\Entity(repositoryClass: ArticlesRepository::class)]
 #[ApiResource(
-    operations:[
+    operations: [
         new Get(),
         new GetCollection(),
+        new Put(),
         new Post(),
         new Patch(),
         new Delete(),
         new Get(
             uriTemplate: '/articles/{slug}',
-            uriVariables:[
+            requirements: [
+                'slug' => '\w+'
+            ],
+            controller: GetArticleBySlugController::class,
+            uriVariables: [
                 'slug' => new Link(fromProperty: 'slug', fromClass: Articles::class)
             ],
-            normalizationContext: [
-                'groups' => ['slug:read'],
-
-            ],
+            name: 'get_article_by_slug',
         ),
         new GetCollection(
             uriTemplate: '/articles/type/{id}',
-            uriVariables:[
+            uriVariables: [
                 'id' => new Link(fromProperty: 'articles', fromClass: Types::class)
             ],
             normalizationContext: [
@@ -51,21 +53,24 @@ class Articles
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['article:list'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['article:list'])]
     private ?float $price = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['article:list'])]
     private ?string $images = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['slug:read'])]
+    #[Groups(['article:list', 'slug:read'])]
     private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['article:list'])]
+    #[Groups(['article:list', 'types:read'])]
     private ?Types $type = null;
 
     public function getId(): ?int

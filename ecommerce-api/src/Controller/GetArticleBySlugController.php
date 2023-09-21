@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Repository\ArticlesRepository;
@@ -9,13 +10,20 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class GetArticleBySlugController extends AbstractController
 {
-    #[Route('/api/articles/{slug}', methods: ['GET'])]
-    public function getArticleBySlug(ArticlesRepository $articlesRepository,
-    NormalizerInterface $normalizer): Response
-    {
+    #[Route('/api/articles/{slug}', name: 'get_article_by_slug', methods: ['GET'])]
+    public function getArticleBySlug(
+        ArticlesRepository $articlesRepository,
+        NormalizerInterface $normalizer,
+        $slug
+    ): Response {
+
+        $article = $articlesRepository->findBySlug(['slug' => $slug]);
+        dd($article);
         return $this->json(
-            $normalizer->normalize($articlesRepository->findOneBy(['slug' => $slug])
-            , ['groups' => 'slug:read']
-        ));
+            $normalizer->normalize(
+                $articlesRepository->findBySlug(['slug' => $slug]),
+                context: ['groups' => 'slug:read']
+            )
+        );
     }
 }
