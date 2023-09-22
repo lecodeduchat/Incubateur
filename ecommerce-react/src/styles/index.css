@@ -4,4 +4,6 @@
 @import "./components/banner.css";
 @import "./components/card.css";
 @import "./components/productDataSheet.css";
+@import "./components/form.css";
+@import "./components/footer.css";
 @import "./pages/basket.css";
