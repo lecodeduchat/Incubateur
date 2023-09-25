@@ -1,25 +1,25 @@
 import "@/App.css";
-import Home from "@/pages/Home";
-import Service from "@/pages/Service";
-import Contact from "@/pages/Contact";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Error from "@/_utils/Error";
-import Layout from "@/pages/Layout";
+
+import PublicRouter from "@/pages/Public/PublicRouter";
+import AdminRouter from "@/pages/Admin/AdminRouter";
+import AuthRouter from "@/pages/Auth/AuthRouter";
+import AuthGuard from "@/_helpers/AuthGuard";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-
-            <Route path="/home" element={<Home />} />
-            <Route path="/service" element={<Service />} />
-            <Route path="/contact" element={<Contact />} />
-
-            <Route path="*" element={<Error />} />
-          </Route>
+          {/* On doit lui préciser après le slashe qu'il y aura d'autres routes en ajoutant une étoile(*) */}
+          {/* On définit deux points d'entrée un public et un admin */}
+          <Route path="/*" element={<PublicRouter />} />
+          <Route path="/admin/*" element={
+            <AuthGuard>
+              <AdminRouter />
+            </AuthGuard>
+          } />
+          <Route path="/auth/*" element={<AuthRouter />} />
         </Routes>
       </BrowserRouter>
     </div>
