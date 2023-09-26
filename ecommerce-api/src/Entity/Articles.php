@@ -13,8 +13,12 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Link;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter; 
 
+// #[ApiResource(paginationItemsPerPage: 2)]
 #[ORM\Entity(repositoryClass: ArticlesRepository::class)]
+#[ApiFilter(OrderFilter::class, properties: ['price'])]
 #[ApiResource(
     operations: [
         new Get(),

@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import Axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 import './auth.css';
 import axios from 'axios';
+import { accountService } from '@/_services/account.service';
 
 const Login = () => {
+    let navigate = useNavigate();
 
     // const [ login, setLogin ] = useState('');
     // const [ password, setPassword ] = useState('');
@@ -13,8 +14,8 @@ const Login = () => {
     //! On peut utiliser un objet pour stocker les valeurs de chaque champ
 
     const [credentials, setCredentials] = useState({
-        login: 'Email',
-        password: 'Mot de passe'
+        email: "delportelaurence@gmail.com",
+        password: "123456"
     });
 
     // Crée une méthode onChange qui va mettre à jour le state en fonction du champ
@@ -31,16 +32,22 @@ const Login = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(credentials);
-        axios.post('http://localhost:8000/api/login_check', credentials);
+        axios.post('https://localhost:8000/api/login_check', credentials)
+        .then(res=> {
+            console.log(res.data.token);
+            accountService.saveToken(res.data.token);
+            navigate('/admin');
+        })
+        .catch(err => console.log(err));
     };
 
     return (
         <form onSubmit={onSubmit}>
             <div className="group">
-                <label htmlFor="login">Identifiant</label>
+                <label htmlFor="email">Identifiant</label>
                 <input 
-                    type="text" name="login" 
-                    value={credentials.login}
+                    type="text" name="email" 
+                    value={credentials.email}
                     onChange={onChange}
                 />
             </div>
