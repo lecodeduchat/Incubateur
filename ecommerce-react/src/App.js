@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Products from "./pages/Products";
-import Product from "./pages/Product";
-import Contact from "./pages/Contact";
-import Basket from "./pages/Basket";
-import Login from "./pages/Login";
+import Home from "@/pages/Home";
+import Products from "@/pages/Products";
+import Product from "@/pages/Product";
+import Contact from "@/pages/Contact";
+import Basket from "@/pages/Basket";
+import Login from "@/pages/Login";
+import AuthGuard from "@/_helpers/AuthGuard";
+import Checkout from "@/pages/Checkout";
 
 function App() {
   return (
@@ -16,6 +18,14 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/connexion" element={<Login />} />
         <Route path="/panier" element={<Basket />} />
+        <Route
+          path="/caisse"
+          element={
+            <AuthGuard>
+              <Checkout />
+            </AuthGuard>
+          }
+        />
         {/* path="*" fonctionne si jamais l'url ne correspond à rien */}
         <Route path="*" element={<Home />} />
       </Routes>

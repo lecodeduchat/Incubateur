@@ -14,41 +14,6 @@ const Basket = () => {
     <div>
       <Header />
       <h1>Votre panier</h1>
-      {/* <table className="table-basket">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-            <th>Prix</th>
-            <th>Quantité</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {basket.map((item) => (
-            <tr className="line-basket" key={item.id}>
-              <td>
-                <img src={item.url} alt={item.name} className="img-small" />
-              </td>
-              <td>{item.name}</td>
-              <td className="price">€{item.price}</td>
-              <td className="quantity">
-                <span className="removeQuantity">-</span>
-                {item.quantity}
-                <span className="addQuantity">+</span>
-              </td>
-              <td className="totalLine">€{item.price * item.quantity}</td>
-            </tr>
-           
-          ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan="4">Total</td>
-            <td>€{total}</td>
-          </tr>
-        </tfoot>
-      </table> */}
       <div className="basket-container">
         <ArticleTable articles={basket} />
         <div className="actions">

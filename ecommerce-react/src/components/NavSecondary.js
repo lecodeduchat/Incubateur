@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const NavSecondary = () => {
   return (
     <div className="nav-secondary">
-      <NavLink to="/connection">
+      <NavLink to="/connexion">
         <i className="fa fa-user"></i>
       </NavLink>
       <NavLink to="/panier">

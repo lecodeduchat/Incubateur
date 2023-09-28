@@ -16,11 +16,15 @@
   width: 40%;
   padding: 0px 40px;
 }
+.product-sheet-content .img-container img {
+  margin-bottom: 16px;
+}
 .product-sheet-content .img-large {
   width: 100%;
 }
 .product-sheet-content .img-small {
   width: 130px;
+  margin-right: 16px;
 }
 .product-sheet-content h1 {
   text-align: left;

@@ -1,9 +1,10 @@
-.basket-container{
+.basket-container {
   width: 80%;
   margin: 0 auto;
 }
 .article-table {
   border-collapse: collapse;
+  width: 100%;
 }
 .article-table th {
   text-align: center;
@@ -16,13 +17,24 @@
 }
 .article-table .price,
 .article-table .totalLine,
-.article-table .quantity
-{
+.article-table .quantity {
   text-align: center;
   width: 120px;
 }
-.article-table .article-name{
+.article-table .article-name {
   padding-left: 20px;
+}
+.article-table .article-name span {
+  display: block;
+}
+.article-table .article-name .article-delete {
+  text-decoration: underline;
+  font-size: 12px;
+  padding-top: 6px;
+}
+.article-table .article-name .article-delete:hover {
+  cursor: pointer;
+  color: var(--primary-color);
 }
 .article-table td .img-small {
   width: 100px;
@@ -35,36 +47,36 @@
   cursor: pointer;
   color: var(--primary-color);
 }
-.article-table .quantity span{
+.article-table .quantity span {
   padding: 0px 30px;
   font-size: 20px;
 }
-.article-table .quantity span:hover{
+.article-table .quantity span:hover {
   cursor: pointer;
   color: var(--primary-color);
 }
-.btn-validate-basket{
-  height:50px;
-  width:220px;
+.btn-validate-basket {
+  height: 50px;
+  width: 220px;
   letter-spacing: 2px;
-  border:none;
+  border: none;
   background-color: var(--primary-color);
-  color:white;
-  
+  color: white;
+
   margin-top: 20px;
 }
 .basket-container form,
-.infos{
+.infos {
   margin: 20px 0px;
   text-align: right;
   font-size: 12px;
 }
-.basket-container .actions{
+.basket-container .actions {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
-.basket-container .btn-action{
+.basket-container .btn-action {
   width: 250px;
   height: 50px;
   border: 1px solid var(--primary-color);
@@ -72,7 +84,7 @@
   line-height: 50px;
   text-align: center;
 }
-.basket-container .btn-action:hover{
+.basket-container .btn-action:hover {
   cursor: pointer;
   background-color: var(--primary-color);
   color: white;

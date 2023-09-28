@@ -1,0 +1,90 @@
+.Checkout header {
+  height: 150px;
+  background: url(@/assets/img/Banner_2000x.webp) no-repeat center;
+}
+.checkout-content {
+  display: flex;
+  flex-direction: row;
+}
+.checkout-content .infos-container,
+.checkout-content .order-container {
+  width: 50%;
+}
+.checkout-content .infos-container {
+  border-right: 1px solid #ccc;
+  padding-right: 20px;
+}
+.checkout-content .order-container {
+  padding-left: 20px;
+}
+.Checkout .order-content .order-list {
+  margin-bottom: 22px;
+}
+.Checkout .OrderRow {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+  margin-bottom: 12px;
+}
+.Checkout .OrderRow img {
+  width: 60px;
+  border-radius: 10px;
+  margin-right: 12px;
+}
+.Checkout .OrderRow .article-quantity {
+  position: absolute;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  top: -5px;
+  left: 45px;
+  display: block;
+  width: 20px;
+  aspect-ratio: 1/1;
+  line-height: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+.Checkout .OrderRow .article-name {
+  font-weight: bold;
+  width: 50%;
+  margin-right: 10%;
+}
+.Checkout .OrderRow .article-total {
+  font-weight: bold;
+  margin-right: 12px;
+  display: inline-block;
+  width: 20%;
+  text-align: end;
+}
+.Checkout .order-content .order-subtotal,
+.Checkout .order-content .order-shipping {
+  margin-bottom: 12px;
+}
+.Checkout .order-content .order-total {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.Checkout .order-content .order-taxes {
+  font-size: 12px;
+  color: #ccc;
+}
+.Checkout .order-content .order-subtotal span:first-child,
+.Checkout .order-content .order-shipping span:first-child,
+.Checkout .order-content .order-total span:first-child {
+  display: inline-block;
+  width: calc(60% + 72px);
+}
+.Checkout .order-content .order-total span:first-child {
+  width: calc(60% + 72px - 35px);
+}
+.Checkout .order-content .order-subtotal span:last-child,
+.Checkout .order-content .order-shipping span:last-child,
+.Checkout .order-content .order-total span:last-child {
+  display: inline-block;
+  width: 20%;
+  text-align: end;
+}

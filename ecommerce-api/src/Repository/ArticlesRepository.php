@@ -22,15 +22,15 @@ class ArticlesRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Article Returns an array of Articles objects
+     * @return Article Returns a Article object
      */
-    public function findBySlug($value): ?Article
+    public function findBySlug($value): ?Articles
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.slug = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 
     //    public function findOneBySomeField($value): ?Articles

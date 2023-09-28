@@ -14,7 +14,7 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\ApiFilter;
-use ApiPlatform\Doctrine\Orm\Filter\OrderFilter; 
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 
 // #[ApiResource(paginationItemsPerPage: 2)]
 #[ORM\Entity(repositoryClass: ArticlesRepository::class)]
@@ -28,6 +28,7 @@ use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
         new Patch(),
         new Delete(),
         new Get(
+            name: 'get_article_by_slug',
             uriTemplate: '/articles/{slug}',
             requirements: [
                 'slug' => '\w+'
@@ -36,7 +37,7 @@ use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
             uriVariables: [
                 'slug' => new Link(fromProperty: 'slug', fromClass: Articles::class)
             ],
-            name: 'get_article_by_slug',
+
         ),
         new GetCollection(
             uriTemplate: '/articles/type/{id}',

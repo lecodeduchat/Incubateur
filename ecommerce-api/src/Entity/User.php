@@ -2,11 +2,28 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Controller\GetUserByEmailController;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Link;
+use ApiPlatform\Metadata\Groups;
 
+#[ApiResource(
+    operations: [
+        new Get(
+            name: 'get_user_by_email',
+            uriTemplate: '/user/{email}',
+            controller: GetUserByEmailController::class,
+            uriVariables: [
+                'email' => new Link(fromProperty: 'email', fromClass: User::class)
+            ],
+        ),
+    ]
+)]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -16,6 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['email:read'])]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -26,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Orders $orders = null;
 
     public function getId(): ?int
     {
@@ -95,5 +116,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getOrders(): ?Orders
+    {
+        return $this->orders;
+    }
+
+    public function setOrders(Orders $orders): static
+    {
+        // set the owning side of the relation if necessary
+        if ($orders->getUser() !== $this) {
+            $orders->setUser($this);
+        }
+
+        $this->orders = $orders;
+
+        return $this;
     }
 }

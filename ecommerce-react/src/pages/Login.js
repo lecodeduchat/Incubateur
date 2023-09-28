@@ -1,43 +1,74 @@
-import React, {useState} from "react";
-import Header from "../components/Header";
+import React, { useState } from "react";
+import Header from "@/components/Header";
 import { NavLink } from "react-router-dom";
-import Footer from "../components/Footer";
+import Footer from "@/components/Footer";
+import { accountService } from "@/_services/account.service";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
-
-  const [email, setEmail] = useState('Email');
-  const [password, setPassword] = useState('Mot de pass');
-  
+  let navigate = useNavigate();
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+  const onChange = (e) => {
+    setCredentials({
+      // On récupère l'état précédent et on le fusionne avec le nouveau
+      // Avant on utilisé prevState, maintenant on utilise le spread operator
+      ...credentials,
+      [e.target.name]: e.target.value,
+    });
+  };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
-  }
+    console.log(credentials);
+    axios
+      .post("https://localhost:8000/api/login_check", credentials)
+      .then((res) => {
+        console.log(res.data);
+        accountService.saveToken(res.data.token);
+        navigate("/caisse");
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <Header />
       <h3 className="">Connexion client</h3>
       <form onSubmit={onSubmit} className="form-content">
-        <input 
-          type="email" 
-          name="email" 
-          className="form-control" 
-          value={email} 
-          onChange={e=>setEmail(e.target.value)}
-        />
-        <input 
-          type="password" 
-          name="password"
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
           className="form-control"
-          value={password}
-          onChange={e=>setPassword(e.target.value)} 
+          value={credentials.email}
+          onChange={onChange}
         />
-        <button type="submit" className="uppercase form-control form-btn-control">se connecter</button>
+        <input
+          type="password"
+          name="password"
+          placeholder="Mot de passe"
+          className="form-control"
+          value={credentials.password}
+          onChange={onChange}
+        />
+        <button
+          type="submit"
+          className="uppercase form-control form-btn-control"
+        >
+          se connecter
+        </button>
       </form>
-      <button className="uppercase form-control form-btn-control btn-create-account">créer un compte</button>
-      <a href="/" className="link">Réinitialiser votre mot de passe</a>
+      <button className="uppercase form-control form-btn-control btn-create-account">
+        créer un compte
+      </button>
+      <a href="/" className="link">
+        Réinitialiser votre mot de passe
+      </a>
       <h3>Continuer en tant qu'invité</h3>
       <NavLink to="/checkout" />
-        <span className="btn-link">CONTINUER</span>
+      <span className="btn-link">CONTINUER</span>
       <NavLink />
       <Footer />
     </div>
