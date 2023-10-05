@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import ArticleTable from "../components/ArticleTable";
+import { accountService } from "../_services/account.service";
 
 const Basket = () => {
   const basket = JSON.parse(localStorage.getItem("basket"));
@@ -9,6 +10,19 @@ const Basket = () => {
     localStorage.setItem("basket", JSON.stringify([]));
   };
   const [isTermAccepted, setIsTermAccepted] = useState(false);
+
+  const goToCheckout = (e) => {
+    e.preventDefault();
+    // Je vérifie si l'utilisateur est connecté
+    if (accountService.isLogged()) {
+      console.log("utilisateur connecté");
+      // Si oui, je le redirige vers la page de paiement
+      window.location.href = "/caisse";
+    } else {
+      // Si non, je le redirige vers la page de connexion
+      window.location.href = "/connexion";
+    }
+  };
 
   return (
     <div>
@@ -31,7 +45,11 @@ const Basket = () => {
         <form>
           {/* onCheck est une fonction call-back permettant de faire remonter les informations */}
           <CGUCheckbox checked={isTermAccepted} onCheck={setIsTermAccepted} />
-          <button disabled={!isTermAccepted} className="btn-validate-basket">
+          <button
+            disabled={!isTermAccepted}
+            className="btn-validate-basket"
+            onClick={(e) => goToCheckout(e)}
+          >
             PASSER AU PAIEMENT
           </button>
         </form>

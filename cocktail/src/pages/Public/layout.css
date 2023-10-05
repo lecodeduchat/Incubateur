@@ -1,0 +1,11 @@
+.home {
+  display: flex;
+  gap: 12px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.service .img-big {
+  width: 500px;
+  height: 500px;
+}

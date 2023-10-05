@@ -1,35 +1,41 @@
 import React from "react";
-// import { useEffect, useState, useRef } from "react";
-import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
-import { userService } from "@/_services/user.service";
+import { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { userService } from "@/_services";
 
 const User = () => {
-  let navigate = useNavigate();
-  // const [users, setUsers] = useState([]);
+  // let navigate = useNavigate();
+  const [users, setUsers] = useState([]);
   //   Création d'une référence pour savoir si le composant est monté ou pas
-  // Permet d'éviter le double appel à l'API
-  // const flag = useRef(false);
+  //   Permet d'éviter le double appel à l'API
+  const flag = useRef(false);
 
-  const { isLoading, data } = useQuery("users", () =>
-    userService.getAllUsers()
-  );
-  const users = data || { data: [] };
-  console.log(users);
-  //   useEffect(() => {
-  //     if (flag.current === false) {
-  //       userService
-  //         .getAllUsers()
-  //         .then((res) => {
-  //           console.log(res.data["hydra:member"]);
-  //           setUsers(res.data["hydra:member"]);
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     }
-  //     return () => (flag.current = true);
-  //   }, []);
+  useEffect(() => {
+    if (flag.current === false) {
+      console.log("test");
+      userService
+        .getAllUsers()
+        .then((res) => {
+          console.log("Affiche dataUsers", res);
+          setUsers(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    return () => (flag.current = true);
+  }, []);
+
+  const deleteUser = (userId) => {
+    console.log(userId);
+    userService
+      .deleteUser(userId)
+      .then((res) => {
+        console.log(res);
+        setUsers((current) => current.filter((user) => user.id !== userId));
+      })
+      .catch((err) => console.log(err));
+  };
 
   //   const marcel = (userId) => {
   //     console.log("click");
@@ -37,10 +43,6 @@ const User = () => {
   //     // navigate(`../edit/${userId}`, { replace: true });
   //     navigate(`../edit/${userId}`);
   //   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="User">
@@ -51,6 +53,7 @@ const User = () => {
       <table>
         <thead>
           <tr>
+            <th></th>
             <th>#</th>
             <th>Email</th>
             <th>Actions</th>
@@ -60,13 +63,19 @@ const User = () => {
           {users.map((user, index) => {
             return (
               <tr key={index}>
-                <td>{user.id}</td>
-                <td>{user.email}</td>
                 <td>
-                  <button onClick={() => navigate(`../edit/${user.id}`)}>
-                    Edit
-                  </button>
+                  <span
+                    className="delete-user-btn"
+                    onClick={() => deleteUser(user.id)}
+                  >
+                    X
+                  </span>
                 </td>
+                <td>
+                  <Link to={`/admin/user/edit/${user.id}`}>{user.id}</Link>
+                </td>
+                <td>{user.email}</td>
+                <td>actions</td>
               </tr>
             );
           })}

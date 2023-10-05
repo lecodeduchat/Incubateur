@@ -9,11 +9,18 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Controller\GetUserByEmailController;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Groups;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
 
 #[ApiResource(
     operations: [
+        new GetCollection(),
+        new Get(),
         new Get(
             name: 'get_user_by_email',
             uriTemplate: '/user/{email}',
@@ -22,6 +29,10 @@ use ApiPlatform\Metadata\Groups;
                 'email' => new Link(fromProperty: 'email', fromClass: User::class)
             ],
         ),
+        new Post(),
+        new Put(),
+        new Patch(),
+        new Delete(),
     ]
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]

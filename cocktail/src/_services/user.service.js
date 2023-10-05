@@ -15,7 +15,21 @@ let getUser = (uid) => {
   return Axios.get(`/users/${uid}`);
 };
 
+let addUser = (user) => {
+  return Axios.post("/users", user);
+};
+
+let updateUser = (user) => {
+  return Axios.put(`/users/${user.id}`, user);
+};
+
+let deleteUser = (uid) => {
+  return Axios.delete(`/users/${uid}`);
+};
 export const userService = {
   getAllUsers,
   getUser,
+  addUser,
+  updateUser,
+  deleteUser,
 };

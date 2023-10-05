@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import OrderList from "@/components/OrderList";
 import axios from "axios";
 
 const Checkout = () => {
   const order = JSON.parse(localStorage.getItem("basket"));
+  const [userData, setUserData] = useState({});
 
-  // Je récupère l'id du client
-  axios.get("https://localhost:8000/api/user").then((res) => {
-    console.log(res.data);
+  // Je récupère l'email du client en décodant le token
+  const token = localStorage.getItem("token");
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace("-", "+").replace("_", "/");
+  const user = JSON.parse(window.atob(base64));
+  const email = user.username;
+
+  // Je récupère les données personnelles du client
+  axios.get("https://localhost:8000/user/" + email).then((res) => {
+    setUserData(res.data);
   });
 
   const sendOrder = () => {
-    console.log("Commande envoyée");
+    console.log("Commande envoyée à", userData.email);
     // création d'une commande
   };
   return (

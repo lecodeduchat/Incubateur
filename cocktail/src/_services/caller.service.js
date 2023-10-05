@@ -13,4 +13,19 @@ Axios.interceptors.request.use((request) => {
   }
   return request;
 });
+
+Axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      accountService.logout();
+      // on redirige vers la page de login
+      window.location.href = "/auth/login";
+    } else {
+      return Promise.reject(error);
+    }
+  }
+);
 export default Axios;
