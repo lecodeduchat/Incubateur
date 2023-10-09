@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { userService } from "@/_services";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const UserAdd = () => {
   const [user, setUser] = useState([]);
@@ -17,7 +18,8 @@ const UserAdd = () => {
     e.preventDefault();
     console.log(user);
     // hasher le mot de passe avant de l'envoyer au serveur
-
+   
+    
     userService
       .addUser(user)
       .then((res) => {
@@ -37,6 +39,15 @@ const UserAdd = () => {
             type="text"
             name="email"
             value={user.email}
+            onChange={onChange}
+          />
+        </div>
+        <div className="group">
+          <label htmlFor="address">Adresse</label>
+          <input
+            type="text"
+            name="address"
+            value={user.address}
             onChange={onChange}
           />
         </div>

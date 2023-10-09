@@ -56,6 +56,7 @@ const User = () => {
             <th></th>
             <th>#</th>
             <th>Email</th>
+            <th>Adresse</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -75,6 +76,7 @@ const User = () => {
                   <Link to={`/admin/user/edit/${user.id}`}>{user.id}</Link>
                 </td>
                 <td>{user.email}</td>
+                <td>{user.address}</td>
                 <td>actions</td>
               </tr>
             );
