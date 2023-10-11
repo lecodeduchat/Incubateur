@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Card = ({ article }) => {
-  const url = "https://127.0.0.1:8001/images/";
+  const url = "https://127.0.0.1:8000/images/";
 
   return (
     <div className="card">
