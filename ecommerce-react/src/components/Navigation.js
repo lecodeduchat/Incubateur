@@ -14,6 +14,9 @@ const Navigation = () => {
                 <NavLink to='/contact' className={(nav) => (nav.isActive ? "nav-active" : "")}>
                     <li>Contactez-nous</li>
                 </NavLink>
+                <NavLink to='/geolocalisation' className={(nav) => (nav.isActive ? "nav-active" : "")}>
+                    <li>Test Leaflet</li>
+                </NavLink>
             </ul>
         </div>
     );

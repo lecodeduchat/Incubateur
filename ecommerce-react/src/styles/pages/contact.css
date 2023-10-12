@@ -1,3 +1,19 @@
-#map {
-  height: 180px;
+/* leaflet */
+.leaflet-container {
+  height: 400px;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.cluster-icon{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color:white;
+  background-color: chocolate;
+  line-height: 40px;
+  text-align: center;
+  /* pour center le rond sur le triangle du marker à ajuter !!! dur dur */
+  transform: translate(-26%,-25%);
 }

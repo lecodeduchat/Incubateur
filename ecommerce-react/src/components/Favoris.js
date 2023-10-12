@@ -6,7 +6,7 @@ const Favoris = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("https://127.0.0.1:8000/api/articles")
+      .get("https://127.0.0.1:8001/api/articles")
       .then((res) => res.data["hydra:member"])
       .then((res) => setData(res));
   }, []);

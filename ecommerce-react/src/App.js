@@ -7,6 +7,7 @@ import Basket from "@/pages/Basket";
 import Login from "@/pages/Login";
 import AuthGuard from "@/_helpers/AuthGuard";
 import Checkout from "@/pages/Checkout";
+import Geolocalisation from "@/pages/Geolocalisation";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/connexion" element={<Login />} />
         <Route path="/panier" element={<Basket />} />
+        <Route path="/geolocalisation" element={<Geolocalisation />} />	
         <Route
           path="/caisse"
           element={
